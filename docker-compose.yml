@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1qaz2wsx
+      MYSQL_DATABASE: aim
+      MYSQL_USER: jason
+      MYSQL_PASSWORD: 1qaz2wsx
+    logging:
+      options:
+        max-size: 10m
+        max-file: "10"
+    ports:
+      - 3307:3306
+    volumes:
+      - ./_mariadb-data:/var/lib/mysql
