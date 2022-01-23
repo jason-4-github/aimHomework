@@ -6,14 +6,14 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
 
-var app = express();
 dotenv.config();
+var app = express();
 var db = require('./models');
 
 const testConnection = async () => {
   try {
     await db.sequelize.authenticate();
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -23,7 +23,6 @@ const testConnection = async () => {
 testConnection();
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,8 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/apis/doc', express.static(path.join(__dirname, 'docs')));
+app.use('/apis/v1', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
