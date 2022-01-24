@@ -1,13 +1,13 @@
-var express = require('express');
-var moment = require('moment');
+const express = require('express');
 const { checkSchema } = require('express-validator');
 
-var { insertMockData } = require('../utils');
+const { insertMockData } = require('../utils');
 const validate = require('../utils/validate');
-var models = require('../models');
+const models = require('../models');
+const getFeeRoute = require('../modules/getFee/getFee.route');
+const getPatientRoute = require('../modules/getPatient/getPatient.route');
 
-var router = express.Router();
-const firstYearOfTaiwan = 1911;
+const router = express.Router();
 
 /**
  * @apiDefine Error404
@@ -37,68 +37,12 @@ const firstYearOfTaiwan = 1911;
  *     }
  */
 
-/* GET users listing. */
 router.get('/', async (req, res, next) => {
   insertMockData();
   res.status(200).json('123');
 });
 
-const birthdayToDateTime = (str) => {
-  return `${parseInt(str.substr(0, 3), 10) + firstYearOfTaiwan}-${str.substr(3, 2)}-${str.substr(5, 2)}`;
-};
-
-router.get('/getFee',
-  checkSchema({
-    birthday: {
-      in: ['query'],
-      notEmpty: true,
-      isLength: {
-        options: {
-          min: 7,
-          max: 7,
-        }
-      }
-    },
-    systemDate: {
-      in: ['query'],
-      notEmpty: true,
-      isDate: true,
-    },
-  }),
-  validate,
- async (req, res, next) => {
-  const { birthday, systemDate } = req.query;
-  const birthdayTransfer = birthdayToDateTime(birthday);
-  const age = moment(systemDate).diff(moment(birthdayTransfer), 'years');
-  const daysDiff = moment(systemDate).diff(moment(birthdayTransfer), 'days');
-
-  if(daysDiff < 0) {
-    res.status(400).json({message: 'Params Error'});
-  } else {
-    const FeeModel = models.sequelize.models.Fee;
-    const result  = await FeeModel.findOne({
-      raw: true,
-      where: {
-        ageStart: models.sequelize.where(
-          models.sequelize.literal('ageStart'),
-          '<=',
-          age
-        ),
-        ageEnd: models.sequelize.where(
-          models.sequelize.literal('ageEnd'),
-          '>=',
-          age
-        ),
-      },
-    });
-
-    res.status(200).json({ amount: result.fee });
-  }
-});
-
-router.post('/getPatient', async (req, res, next) => {
-  insertMockData();
-  res.status(200).json('123');
-});
+router.use('/getFee', getFeeRoute);
+router.use('/getPatient', getPatientRoute);
 
 module.exports = router;

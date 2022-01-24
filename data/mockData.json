@@ -1,5 +1,5 @@
 {
-  "countries": [
+  "nationalities": [
     {
       "name": "台灣"
     },
@@ -37,31 +37,31 @@
       "name": "王小明",
       "birthday": "0570415",
       "gender": "Male",
-      "country": 1
+      "nationalityId": 1
     },
     {
       "name": "李小美",
       "birthday": "1000801",
       "gender": "Female",
-      "country": 1
+      "nationalityId": 1
     },
     {
       "name": "莊小云",
       "birthday": "0771003",
       "gender": "Female",
-      "country": 1
+      "nationalityId": 1
     },
     {
       "name": "許小信",
       "birthday": "1101201",
       "gender": "Male",
-      "country": 2
+      "nationalityId": 2
     },
     {
       "name": "陳小天",
       "birthday": "0381208",
       "gender": "Male",
-      "country": 3
+      "nationalityId": 3
     }
   ]
 }

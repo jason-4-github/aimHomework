@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-  var Countries = sequelize.define('Countries', {
-    countriesId: {
+  var Nationalities = sequelize.define('Nationalities', {
+    nationalityId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
@@ -10,5 +10,5 @@ module.exports = (sequelize) => {
     name: DataTypes.STRING,
   });
 
-  return Countries;
+  return Nationalities;
 };

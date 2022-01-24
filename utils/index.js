@@ -1,6 +1,7 @@
-var _ = require('lodash');
-var models = require('../models');
-var mockData = require('../data/mockData.json');
+const _ = require('lodash');
+
+const models = require('../models');
+const mockData = require('../data/mockData.json');
 
 const insertMockData = () => {
   Object.keys(mockData).forEach((keyName) => {
@@ -15,6 +16,14 @@ const insertMockData = () => {
   });
 };
 
+const firstYearOfTaiwan = 1911;
+
+const birthdayToDateTime = (str) => {
+  return `${parseInt(str.substr(0, 3), 10) + firstYearOfTaiwan}-${str.substr(3, 2)}-${str.substr(5, 2)}`;
+};
+
 module.exports = {
   insertMockData,
+  firstYearOfTaiwan,
+  birthdayToDateTime,
 };

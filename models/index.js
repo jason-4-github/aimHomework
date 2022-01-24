@@ -13,7 +13,7 @@ if (config.use_env_variable) {
 
 const modelDefiners = [
 	require('./fee'),
-  require('./countries'),
+  require('./nationalities'),
   require('./patients'),
 ];
 
@@ -21,12 +21,13 @@ const modelDefiners = [
 for (const modelDefiner of modelDefiners) {
   modelDefiner(sequelize);
 }
-
+// console.log(db);
 Object.keys(sequelize.models).forEach(modelName => {
   if (sequelize.models[modelName].associate) {
     sequelize.models[modelName].associate(sequelize.models);
   }
 });
+// sequelize.models.Nationalities.belongsTo(sequelize.models.Patients);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
