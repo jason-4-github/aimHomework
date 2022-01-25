@@ -2,28 +2,24 @@ const express = require('express');
 const { checkSchema } = require('express-validator');
 
 const validate = require('../../utils/validate');
-const getFeeController = require('./getFee.controller');
+const getPatientController = require('./patient.controller');
+
 const router = express.Router();
 
-router.get('/',
+router.post('/',
   checkSchema({
-    birthday: {
-      in: ['query'],
+    patientId: {
+      in: ['body'],
       notEmpty: true,
-      isLength: {
-        options: {
-          min: 7,
-          max: 7,
-        }
-      }
+      isNumeric: true,
     },
     systemDate: {
-      in: ['query'],
+      in: ['body'],
       notEmpty: true,
       isDate: true,
     },
   }),
   validate,
-  getFeeController.getFee);
+  getPatientController.getPatient);
 
 module.exports = router;

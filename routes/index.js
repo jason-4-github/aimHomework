@@ -1,11 +1,9 @@
 const express = require('express');
-const { checkSchema } = require('express-validator');
+const _ = require('lodash');
 
 const { insertMockData } = require('../utils');
-const validate = require('../utils/validate');
-const models = require('../models');
-const getFeeRoute = require('../modules/getFee/getFee.route');
-const getPatientRoute = require('../modules/getPatient/getPatient.route');
+const feeRoute = require('../modules/fee/fee.route');
+const patientRoute = require('../modules/patient/patient.route');
 
 const router = express.Router();
 
@@ -37,12 +35,21 @@ const router = express.Router();
  *     }
  */
 
-router.get('/', async (req, res, next) => {
-  insertMockData();
-  res.status(200).json('123');
+router.get('/createMockData', async (req, res, next) => {
+  try {
+    const insertResults = await insertMockData() || [];
+    _.remove(insertResults, (e) => !e);
+
+    res.status(200).json({
+      insertedData: insertResults,
+      message: insertResults.length === 0 ? 'Data Exist!' : 'Data Insert Success!'
+    });
+  } catch (e) {
+    res.status(400).json(e);
+  }
 });
 
-router.use('/getFee', getFeeRoute);
-router.use('/getPatient', getPatientRoute);
+router.use('/getFee', feeRoute);
+router.use('/getPatient', patientRoute);
 
 module.exports = router;

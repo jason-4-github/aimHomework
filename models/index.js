@@ -13,8 +13,8 @@ if (config.use_env_variable) {
 
 const modelDefiners = [
 	require('./fee'),
-  require('./nationalities'),
-  require('./patients'),
+  require('./nationality'),
+  require('./patient'),
 ];
 
 // We define all models according to their files.

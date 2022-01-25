@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const { birthdayToDateTime } = require('../../utils');
-const getFeeService = require('./getFee.service');
+const getFeeService = require('./fee.service');
 
 
 const getFee = async (req, res, next) => {
