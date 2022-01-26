@@ -8,7 +8,7 @@ var dotenv = require('dotenv');
 
 dotenv.config();
 var app = express();
-var db = require('./models');
+var db = require('./src/models');
 
 const testConnection = async () => {
   try {
@@ -22,7 +22,7 @@ const testConnection = async () => {
 
 testConnection();
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./src/routes/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,10 +1,9 @@
 const _ = require('lodash');
 
 const models = require('../models');
-const mockData = require('../data/mockData.json');
 const { firstYearOfTaiwan } = require('./constants');
 
-const insertMockData = async () => {
+const insertMockData = async (mockData) => {
   const insertDataActions = [];
   Object.keys(mockData).forEach((keyName) => {
     const Model = models.sequelize.models[_.upperFirst(keyName)];
