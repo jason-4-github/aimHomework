@@ -10,11 +10,11 @@ const getFee = async (req, res, next) => {
   const age = moment(systemDate).diff(moment(birthdayTransfer), 'years');
   const daysDiff = moment(systemDate).diff(moment(birthdayTransfer), 'days');
 
-  if(daysDiff < 0) {
-    res.status(400).json({message: 'Params Error'});
-  } else {
+  if(daysDiff >= 0 && age < 1000) {
     const fee = await getFeeService.getFeeByAge(age);
     res.status(200).json({ amount: fee.fee });
+  } else {
+    res.status(400).json({ message: 'Time Error!' });
   }
 };
 

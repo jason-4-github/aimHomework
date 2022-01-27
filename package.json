@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "doc": "apidoc -i src -o docs",
-    "test": "mocha src/test --recursive --timeout=10000 --exit"
+    "test": "mocha src/test --recursive --timeout=10000 --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
@@ -26,19 +26,20 @@
     "morgan": "~1.9.1",
     "sequelize": "^6.13.0"
   },
-  "apidoc": {
-    "template": {
-      "forceLanguage": "en"
-    },
-    "name": "API Doc",
-    "title": "API Doc",
-    "description": "APIs for AIM",
-    "url": "http://xxx.xxx.xxx.xxx:xxxx"
-  },
   "devDependencies": {
     "apidoc": "^0.50.3",
     "chalk": "^5.0.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
+  },
+  "apidoc": {
+    "template": {
+      "forceLanguage": "en"
+    },
+    "name": "API Doc",
+    "version": "0.0.1",
+    "title": "API Doc",
+    "description": "APIs for AIM",
+    "url": "http://localhost:3001"
   }
 }

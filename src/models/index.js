@@ -21,7 +21,7 @@ const modelDefiners = [
 for (const modelDefiner of modelDefiners) {
   modelDefiner(sequelize);
 }
-// console.log(db);
+
 Object.keys(sequelize.models).forEach(modelName => {
   if (sequelize.models[modelName].associate) {
     sequelize.models[modelName].associate(sequelize.models);

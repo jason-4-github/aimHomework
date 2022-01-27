@@ -26,9 +26,12 @@ const getPatient = async (req, res, next) => {
           amount: feeResult.fee,
         });
       } else res.status(400).json({ message: 'Time Error!' });
-    }
+    } else res.status(200).json({
+      patient: {},
+      amount: 0,
+    });
+
   } catch (e) {
-    console.log('aa');
     res.status(400).json({ message: e });
   }
 };

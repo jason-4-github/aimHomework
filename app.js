@@ -8,6 +8,7 @@ var dotenv = require('dotenv');
 
 dotenv.config();
 var app = express();
+const { handleError } = require('./src/utils/error');
 var db = require('./src/models');
 
 const testConnection = async () => {
@@ -44,14 +45,10 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use((err, req, res, next) => {
+  console.log('Error: ', err.stack);
+  handleError(err, res);
 });
+
 
 module.exports = app;

@@ -6,6 +6,41 @@
   - #### 建立 schema 的 Create SQL(或 ORM 的 create Schema 指令)
   - #### 新增資料的 Insert SQL
 
+    (Source code在 route/index.js 中)
+
+  [ POST ] createMockData
+  ```
+  http://localhost:${env.PORT}/apis/v1/createMockData
+  ```
+ === Request variables ===
+
+ - @url [String] ```env.PORT``` : 在env中設定的api port
+ - @body [object] ```data``` : 匯入的資料，若為空或不帶則以src/data/mockData.json裡的資料當作插入的資料，註:只開放註冊過的model匯入資料，ex:
+ ```
+ header: { Content-Type: application/json }
+  body: {
+    data: {
+      "nationalities": [
+        {
+          "name": "中國"
+        }
+      ],
+    }
+  }
+ ```
+=== Response ===
+```
+{
+    "insertedData": [
+      {
+        "nationalityId": 5,
+        "name": "中國"
+      },
+    ],
+    "message": "Data Exist!"
+}
+```
+
 ---
 
 ## 1.2 1.3
@@ -14,9 +49,12 @@
 
  2. ```npm install``` 安裝套件至node_modules
 
- 3. ```npm start``` 啟動server
+ 3. ```npm start``` 啟動api server
 
  - #### API 相關說明
+
+ 以下為簡略介紹api結構，細節請將api server執行起來後前往
+ [http://localhost:\${env.PORT}/apis/doc](http://localhost:\${env.PORT}/apis/doc)
 
  1. [ GET ] getFee
  ```
