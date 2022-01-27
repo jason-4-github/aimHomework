@@ -8,14 +8,19 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     name: DataTypes.STRING,
-    birthday: DataTypes.INTEGER,
+    birthday: DataTypes.STRING,
     gender: DataTypes.STRING,
-    country: DataTypes.INTEGER,
+    nationalityId: DataTypes.INTEGER,
     createdAt: {
       type: DataTypes.DATE,
-      field: 'created_at'
+      field: 'created_at',
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3)'),
     },
   });
+
+  Patients.associate = (models) => {
+    Patients.belongsTo(models.Nationalities, { foreignKey: 'nationalityId' });
+  };
 
   return Patients;
 };

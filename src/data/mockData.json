@@ -1,0 +1,67 @@
+{
+  "nationalities": [
+    {
+      "name": "台灣"
+    },
+    {
+      "name": "日本"
+    },
+    {
+      "name": "美國"
+    }
+  ],
+  "fee": [
+    {
+      "fee": 150,
+      "ageStart": 3,
+      "ageEnd": 70
+    },
+    {
+      "fee": 50,
+      "ageStart": 71,
+      "ageEnd": 80
+    },
+    {
+      "fee": 50,
+      "ageStart": 0,
+      "ageEnd": 2
+    },
+    {
+      "fee": 0,
+      "ageStart": 81,
+      "ageEnd": 999
+    }
+  ],
+  "patients": [
+    {
+      "name": "王小明",
+      "birthday": "0570415",
+      "gender": "Male",
+      "nationalityId": 1
+    },
+    {
+      "name": "李小美",
+      "birthday": "1000801",
+      "gender": "Female",
+      "nationalityId": 1
+    },
+    {
+      "name": "莊小云",
+      "birthday": "0771003",
+      "gender": "Female",
+      "nationalityId": 1
+    },
+    {
+      "name": "許小信",
+      "birthday": "1101201",
+      "gender": "Male",
+      "nationalityId": 2
+    },
+    {
+      "name": "陳小天",
+      "birthday": "0381208",
+      "gender": "Male",
+      "nationalityId": 3
+    }
+  ]
+}

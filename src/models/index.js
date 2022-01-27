@@ -13,8 +13,8 @@ if (config.use_env_variable) {
 
 const modelDefiners = [
 	require('./fee'),
-  require('./countries'),
-  require('./patients'),
+  require('./nationality'),
+  require('./patient'),
 ];
 
 // We define all models according to their files.
@@ -27,6 +27,7 @@ Object.keys(sequelize.models).forEach(modelName => {
     sequelize.models[modelName].associate(sequelize.models);
   }
 });
+// sequelize.models.Nationalities.belongsTo(sequelize.models.Patients);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

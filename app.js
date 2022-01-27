@@ -6,14 +6,15 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
 
-var app = express();
 dotenv.config();
-var db = require('./models');
+var app = express();
+const { handleError } = require('./src/utils/error');
+var db = require('./src/models');
 
 const testConnection = async () => {
   try {
     await db.sequelize.authenticate();
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync();
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -22,8 +23,7 @@ const testConnection = async () => {
 
 testConnection();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./src/routes/index');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,8 +36,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/apis/doc', express.static(path.join(__dirname, 'docs')));
+app.use('/apis/v1', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,14 +45,10 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use((err, req, res, next) => {
+  console.log('Error: ', err.stack);
+  handleError(err, res);
 });
+
 
 module.exports = app;
