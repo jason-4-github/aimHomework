@@ -45,6 +45,14 @@
 
 ## 1.2 1.3
  - #### build & install 相關說明
+
+```
+Version Requirements
+  Nodejs >= 14.5.0
+  Mariadb: 10.6
+
+```
+
  1. 產生一份 ```.env``` 檔並複製 ```.env.example``` 中的內容，若已有空的db則將資訊替換，若沒有亦可選擇透過 ```docker-compose up -d``` 啟動一個mariadb的docker container。
 
  2. ```npm install``` 安裝套件至node_modules
